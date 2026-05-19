@@ -807,6 +807,66 @@ const AuthModal = (() => {
       setLoading(btn, false);
     }
   };
+
+  /* ── 🛠️ FORGOT PASSWORD SUBMIT ── */
+window.submitForgotPassword = async () => {
+    const email = document.getElementById('lm-forgot-email')?.value.trim();
+    const btn   = document.getElementById('lm-forgot-btn');
+    const errEl = document.getElementById('lm-forgot-error');
+    const succEl = document.getElementById('lm-forgot-success');
+
+    if (errEl) errEl.hidden = true;
+    if (succEl) succEl.hidden = true;
+
+    if (!email) {
+        if (errEl) {
+            errEl.textContent = '⚠️ Please enter your email address.';
+            errEl.hidden = false;
+        }
+        return;
+    }
+
+    // Set loading spinner state using your helper function
+    if (btn) {
+        btn.disabled = true;
+        btn.dataset.orig = btn.innerHTML;
+        btn.innerHTML = '<span class="lm-spinner"></span> Sending…';
+    }
+
+    try {
+        const res = await fetch('includes/forgot_process.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+            if (succEl) {
+                succEl.textContent = `🎉 ${data.message}`;
+                succEl.hidden = false;
+            }
+            document.getElementById('lm-forgot-email').value = '';
+        } else {
+            if (errEl) {
+                errEl.textContent = `⚠️ ${data.message || 'Verification failed.'}`;
+                errEl.hidden = false;
+            }
+        }
+    } catch (err) {
+        console.error('[AuthModal] Forgot Password Error:', err);
+        if (errEl) {
+            errEl.textContent = '⚠️ Network error. Check your connection.';
+            errEl.hidden = false;
+        }
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btn.dataset.orig || btn.innerHTML;
+        }
+    }
+};
+
  
   /* ── 🛠️ FIXED REGISTER SUBMIT ── */
 window.submitRegister = async () => {
@@ -871,7 +931,7 @@ window.submitRegister = async () => {
       console.log('[AuthModal] Registration API response returned:', data);
 
       if (res.ok && data.success) {
-        showMsg('lm-reg-success', '🎉 Account created! Switching to Sign In…', false);
+        showMsg('lm-reg-success', '🎉 Account created!', false);
         setTimeout(() => {
           switchTab('login');
           const loginEmail = document.getElementById('lm-login-email');

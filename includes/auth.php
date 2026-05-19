@@ -1,13 +1,11 @@
 <?php
-// ============================================================
-// AUTH HELPER
 // includes/auth.php
-// ============================================================
+// FIX: Removed absolute paths. Uses relative paths to prevent routing breaks.
 
 function requireAdmin() {
     if (session_status() === PHP_SESSION_NONE) session_start();
     if (empty($_SESSION['admin_id'])) {
-        header('Location: /CREATIVEKIT3A-WEBSITE/admin/login.php');
+        header('Location: login.php'); 
         exit;
     }
 }
@@ -15,11 +13,11 @@ function requireAdmin() {
 function requireSuperAdmin() {
     if (session_status() === PHP_SESSION_NONE) session_start();
     if (empty($_SESSION['admin_id'])) {
-        header('Location: /CREATIVEKIT3A-WEBSITE/admin/login.php');
+        header('Location: login.php'); 
         exit;
     }
     if ($_SESSION['admin_role'] !== 'superadmin') {
-        header('Location: /CREATIVEKIT3A-WEBSITE/admin/dashboard.php?error=unauthorized');
+        header('Location: dashboard.php?error=unauthorized'); 
         exit;
     }
 }
@@ -35,3 +33,4 @@ function adminName() {
 function adminRole() {
     return isset($_SESSION['admin_role']) ? $_SESSION['admin_role'] : '';
 }
+?>

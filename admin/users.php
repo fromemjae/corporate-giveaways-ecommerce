@@ -54,39 +54,15 @@ $users = mysqli_query($conn, "SELECT * FROM users ORDER BY created_at DESC");
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Users Management | CreativeKit3A Admin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; color: #333; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .header h2 { margin: 0; color: #FF6B00; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; }
-    .btn-sm { padding: 4px 8px; font-size: 0.8rem; }
-    .btn-warning { background: #ff9800; color: white; }
-    .btn-success { background: #4caf50; color: white; }
-    .btn-danger { background: #f44336; color: white; }
-    .btn-info { background: #00bcd4; color: white; }
-    .alert { padding: 12px; border-radius: 4px; margin-bottom: 20px; font-weight: 600; }
-    .alert-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-    .alert-danger { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
-    .card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; }
-    .card-header { background: #fff; padding: 15px 20px; border-bottom: 1px solid #eee; }
-    .card-header h3 { margin: 0; font-size: 1.1rem; color: #424242; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 12px 20px; border-bottom: 1px solid #eee; }
-    th { background: #f8f9fa; font-weight: 600; color: #666; }
-    tr:hover { background: #fbfbfb; }
-    .badge { padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-    .badge-active { background: #e8f5e9; color: #2e7d32; }
-    .badge-banned { background: #ffebee; color: #c62828; }
-    .actions-cell { display: flex; gap: 5px; flex-wrap: nowrap; }
-  </style>
+  <link rel="stylesheet" href="admin.css?v=<?php echo time(); ?>">
 </head>
 <body>
+  
 
 <div class="container">
   <div class="header">
     <h2><i class="fas fa-users"></i> Registered Customers Management</h2>
-    <a href="dashboard.php" class="btn" style="background: #424242; color:white;"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    <a href="dashboard.php" class="btn admin-elem-p2-32"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
   </div>
 
   <?php if ($success): ?>
@@ -139,7 +115,7 @@ $users = mysqli_query($conn, "SELECT * FROM users ORDER BY created_at DESC");
         <?php endwhile; ?>
         <?php if (mysqli_num_rows($users) === 0): ?>
         <tr>
-          <td colspan="7" style="text-align: center; color: #888; padding: 30px;">No registered user accounts found in database.</td>
+          <td colspan="7" class="admin-elem-p2-33">No registered user accounts found in database.</td>
         </tr>
         <?php endif; ?>
       </tbody>

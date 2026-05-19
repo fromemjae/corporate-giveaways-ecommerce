@@ -1,3 +1,6 @@
+
+<!-- INJECTED ADMIN CSS -->
+<link rel="stylesheet" href="admin.css?v=<?php echo time(); ?>">
 <?php
 // admin/index.php — redirect to dashboard or login
 session_start();

@@ -1,28 +1,16 @@
-<!-- ============================================================
-       FOOTER
-       ============================================================ -->
-  <footer class="site-footer" role="contentinfo">
+<footer class="site-footer" role="contentinfo">
     <div class="footer-main">
       <div class="container">
         <div class="footer-grid">
 
-          <!-- Brand -->
           <div class="footer-brand">
             <a href="/" aria-label="Pinoyballers home"><span class="logo-text">CreativeKit3A</span></a>
             <p class="tagline">VAT registered company<br>2779B R. FERNANDEZ ST. CORNER BENITA ST. GAGALANGIN, TONDO, MANILA, Manila, Philippines, 1013</p>
             <div class="footer-social" aria-label="Social media links">
               <a href="https://www.facebook.com/profile.php?id=100063787431490" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <!--
-           
-              <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="https://www.pinterest.com/" target="_blank" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-              <a href="https://www.instagram.com//" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-               -->
-            </div>
+              </div>
           </div>
 
-          <!-- Contact Info -->
           <div class="footer-col">
             <h5>Contact Information</h5>
             <div class="footer-contact-item">
@@ -40,21 +28,13 @@
           </div>
 
          
-          <!-- Customer Help & Company -->
           <div class="footer-col">
             <h5>Customer Help</h5>
             <ul>
-              <li><a href="/faq/">About</a></li>
+              <li><a href="/about.php">About</a></li>
               <li><a href="/accessories-gadgets/index2.html">Category</a></li>
               <li><a href="/contact-us/">Contact Us</a></li>
-              <!--
-              
-              <li><a href="/about-us/">About Us</a></li>
-              <li><a href="/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="/blog/">Blog</a></li>
-              <li><a href="/work-with-us/">We Are Hiring</a></li>
-            -->
-            </ul>
+              </ul>
           </div>
 
         </div>
@@ -64,10 +44,6 @@
     <hr class="footer-divider">
 
     <div class="container">
-      <!-- Tag Links -->
-      
-
-      <!-- Bottom Bar -->
       <div class="footer-bottom">
         <p>&copy; Copyright 2026. CreativeKit3A.shop All Rights Reserved.</p>
         <div class="footer-payments" aria-label="Accepted payment methods">
@@ -83,22 +59,11 @@
   </footer>
 
 
-<!-- ============================================================
-       ADDED: LOGIN / REGISTER MODAL  (#login-modal)
-       One modal, two tabs: "login" and "register".
-       Opened by:  openModal('login-modal')
-       Tab switch: switchTab('login') | switchTab('register')
-       Both functions are defined in main.js (AuthModal module).
-       Backend endpoints expected:
-         POST /api/auth/login    → { email, password }
-         POST /api/auth/register → { first_name, last_name, email, phone, password }
-       ============================================================ -->
- 
-  <div class="lm-overlay" id="lm-overlay" onclick="closeAllModals()" aria-hidden="true"></div>
+<div class="lm-overlay" id="lm-overlay" onclick="closeAllModals()" aria-hidden="true"></div>
 
 <div class="lm-modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
   <div class="lm-card">
-    <button class="lm-close" onclick="closeModal('login-modal')" aria-label="Close">×</button>
+    <button class="lm-close" onclick="closeModal('login-modal'); document.getElementById('panel-forgot').style.display='none'; document.getElementById('panel-login').style.display='block';" aria-label="Close">×</button>
 
     <div class="lm-header">
       <span class="lm-brand">CreativeKit3A</span>
@@ -116,12 +81,14 @@
         <div class="lm-pw-wrap">
           <input type="password" id="lm-login-password" placeholder="••••••••" required>
           <button type="button" class="lm-pw-toggle" onclick="togglePw('lm-login-password', this)"><i class="fas fa-eye"></i></button>
+          
         </div>
       </div>
 
       <div class="lm-extras">
         <label class="lm-remember"><input type="checkbox"> Remember me</label>
-        <a href="#" class="lm-forgot">Forgot password?</a>
+        
+        <a href="#" class="lm-forgot" onclick="document.getElementById('panel-login').style.display='none'; document.getElementById('panel-forgot').style.display='block'; return false;">Forgot password?</a>
       </div>
 
       <div class="lm-msg lm-msg--error" id="lm-login-error" hidden></div>
@@ -135,6 +102,30 @@
         <a href="#" onclick="closeModal('login-modal'); openModal('register-modal'); return false;">Register here</a>
       </p>
     </div>
+
+    <div class="lm-panel" id="panel-forgot" style="display: none;">
+      <p style="font-size: 0.85rem; margin-bottom: 15px; color: #666; line-height: 1.45;">
+        Enter your registered email address below, and we will send you instructions to reset your password.
+      </p>
+
+      <div class="lm-field">
+        <label for="lm-forgot-email"><i class="fas fa-envelope"></i> Email Address</label>
+        <input type="email" id="lm-forgot-email" placeholder="you@email.com" required>
+      </div>
+
+      <div class="lm-msg lm-msg--error" id="lm-forgot-error" hidden></div>
+      <div class="lm-msg lm-msg--success" id="lm-forgot-success" hidden></div>
+
+      <button type="button" class="btn btn-primary lm-submit" id="lm-forgot-btn" onclick="submitForgotPassword(); return false;">
+        <i class="fas fa-paper-plane"></i> Send Reset Link
+      </button>
+
+      <p class="lm-switch">
+        Remembered your password? 
+        <a href="#" onclick="document.getElementById('panel-forgot').style.display='none'; document.getElementById('panel-login').style.display='block'; return false;">Sign in here</a>
+      </p>
+    </div>
+
   </div>
 </div>
 
@@ -186,7 +177,7 @@
       </div>
 
       <div class="lm-terms">
-        <label><input type="checkbox" id="lm-reg-terms" required> I agree to the <a href="#">Terms & Conditions</a></label>
+        <label><input type="checkbox" id="lm-reg-terms" required> I agree to the <a href="about.php">Terms & Conditions</a></label>
       </div>
 
       <div class="lm-msg lm-msg--error" id="lm-reg-error" hidden></div>
@@ -198,15 +189,11 @@
 
       <p class="lm-switch">
         Already have an account? 
-        <a href="#" onclick="switchTab('login'); return false;">Sign in here</a>
+        <a href="#" onclick="closeModal('register-modal'); openModal('login-modal'); switchTab('login'); return false;">Sign in here</a>
       </p>
     </div>
   </div>
 </div>
-  <!-- ============================================================
-       YOUR JAVASCRIPT (loaded last, no defer needed since it's
-       at the bottom of body)
-       ============================================================ -->
   <script src="/CREATIVEKIT3A-WEBSITE/main.js"></script>
 
 
