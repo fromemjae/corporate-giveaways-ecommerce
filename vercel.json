@@ -1,17 +1,17 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/", "destination": "/index.php" }
-  ],
-  "headers": [
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.1"
+    }
+  },
+  "routes": [
     {
-      "source": "/index.php",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html"
-        }
-      ]
+      "src": "/includes/(.*)",
+      "dest": "/api/includes/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
